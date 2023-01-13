@@ -1,0 +1,51 @@
+﻿@model WebModel_Lab1.Models.Account
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <input asp-for="AccountNumber" class="form-control" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usreou" class="control-label"></label>
+                <select asp-for="Usreou" class ="form-control" asp-items="ViewBag.Usreou"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Itn" class="control-label"></label>
+                <select asp-for="Itn" class ="form-control" asp-items="ViewBag.Itn"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Currency" class="control-label"></label>
+                <input asp-for="Currency" class="form-control" />
+                <span asp-validation-for="Currency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditSum" class="control-label"></label>
+                <input asp-for="CreditSum" class="form-control" />
+                <span asp-validation-for="CreditSum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,182 @@
+﻿@using WebModel_Lab1.Models.TagHelperModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*model IEnumerable<WebModel_Lab1.Models.Account>*@
+@model AccsViewModel
+
+
+
+
+<style>
+    .glyphicon {
+        display: inline-block;
+        padding: 0 5px;
+    }
+
+    .glyphicon-chevron-right:after {
+        content: "\00BB";
+    }
+
+    .glyphicon-chevron-left:before {
+        content: "\00AB";
+    }
+</style>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Accounts</h1>
+
+<form method="get">
+    <label>USREOU: </label>
+    <input name="USREOU" value="@Model.FilterViewModel.SelectedUSREOU" />
+
+    <label>Currency: </label>
+    <input name="Currency" value="@Model.FilterViewModel.SelectedCurrency" />
+
+
+
+    <input type="submit" value="Filter" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Account Number
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.UsreouSort)"
+                   asp-route-usreou="@(Model.FilterViewModel.SelectedUSREOU)"
+                   asp-route-currency="@(Model.FilterViewModel.SelectedCurrency)">USREOU</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.BalanceSort)"
+                   asp-route-usreou="@(Model.FilterViewModel.SelectedUSREOU)"
+                   asp-route-currency="@(Model.FilterViewModel.SelectedCurrency)">Balance</a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.CreditSort)"
+                   asp-route-usreou="@(Model.FilterViewModel.SelectedUSREOU)"
+                   asp-route-currency="@(Model.FilterViewModel.SelectedCurrency)">Credit</a>
+            </th>
+            <th>
+                Currency
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var item in Model.Accounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usreou)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreditSum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AccountNumber">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AccountNumber">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AccountNumber">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+            <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-skinTone="@(Model.FilterViewModel.SelectedUSREOU)"
+       asp-route-master="@(Model.FilterViewModel.SelectedCurrency)"
+       asp-route-sortOrder="@(Model.SortViewModel.Current)"
+       class="glyphicon glyphicon-chevron-left">
+                Back
+            </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+            <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-skinTone="@(Model.FilterViewModel.SelectedUSREOU)"
+       asp-route-master="@(Model.FilterViewModel.SelectedCurrency)"
+       asp-route-sortOrder="@(Model.SortViewModel.Current)"
+       class="glyphicon glyphicon-chevron-right">
+                Forward
+            </a>
+    }
+</p>
+
+
+
+
+
+
+@*@<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditSum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItnNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsreouNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditSum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItnNavigation.Itn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsreouNavigation.Usreou)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AccountNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AccountNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AccountNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@

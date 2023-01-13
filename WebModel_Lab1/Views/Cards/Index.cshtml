@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebModel_Lab1.Models.Card>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfExpire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cvv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Percentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItnNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfCard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfExpire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cvv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItnNavigation.Itn)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CardNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CardNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CardNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
