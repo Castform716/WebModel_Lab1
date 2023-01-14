@@ -15,10 +15,10 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<User_LR2> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<User_LR2> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

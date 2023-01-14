@@ -18,11 +18,11 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account.Manage
 {
     public class DownloadPersonalDataModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<DownloadPersonalDataModel> _logger;
 
         public DownloadPersonalDataModel(
-            UserManager<User_LR2> userManager,
+            UserManager<IdentityUser> userManager,
             ILogger<DownloadPersonalDataModel> logger)
         {
             _userManager = userManager;
@@ -46,7 +46,7 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account.Manage
 
             // Only include personal data for download
             var personalData = new Dictionary<string, string>();
-            var personalDataProps = typeof(User_LR2).GetProperties().Where(
+            var personalDataProps = typeof(IdentityUser).GetProperties().Where(
                             prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
             foreach (var p in personalDataProps)
             {

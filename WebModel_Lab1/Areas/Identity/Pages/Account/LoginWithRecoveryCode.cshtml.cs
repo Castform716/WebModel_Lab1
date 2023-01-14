@@ -15,13 +15,13 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
 {
     public class LoginWithRecoveryCodeModel : PageModel
     {
-        private readonly SignInManager<User_LR2> _signInManager;
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
 
         public LoginWithRecoveryCodeModel(
-            SignInManager<User_LR2> signInManager,
-            UserManager<User_LR2> userManager,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
             ILogger<LoginWithRecoveryCodeModel> logger)
         {
             _signInManager = signInManager;

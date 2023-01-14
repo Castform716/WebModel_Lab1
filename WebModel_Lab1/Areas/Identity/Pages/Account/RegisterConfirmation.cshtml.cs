@@ -18,10 +18,10 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<User_LR2> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

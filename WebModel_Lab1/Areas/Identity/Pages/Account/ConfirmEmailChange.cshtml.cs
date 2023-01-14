@@ -16,10 +16,10 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
-        private readonly SignInManager<User_LR2> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<User_LR2> userManager, SignInManager<User_LR2> signInManager)
+        public ConfirmEmailChangeModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -17,9 +17,9 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<User_LR2> userManager)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
         }

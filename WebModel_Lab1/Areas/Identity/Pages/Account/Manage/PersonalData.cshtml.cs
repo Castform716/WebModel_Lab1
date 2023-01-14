@@ -12,11 +12,11 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<User_LR2> userManager,
+            UserManager<IdentityUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

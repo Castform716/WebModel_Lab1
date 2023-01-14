@@ -14,11 +14,11 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account.Manage
 {
     public class Disable2faModel : PageModel
     {
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<Disable2faModel> _logger;
 
         public Disable2faModel(
-            UserManager<User_LR2> userManager,
+            UserManager<IdentityUser> userManager,
             ILogger<Disable2faModel> logger)
         {
             _userManager = userManager;

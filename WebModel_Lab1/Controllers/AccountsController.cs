@@ -90,25 +90,25 @@ namespace WebModel_Lab1.Controllers
         //    return View(await bankSystemContext.ToListAsync());
         //}
 
-        //// GET: Accounts/Details/5
-        //public async Task<IActionResult> Details(string id)
-        //{
-        //    if (id == null || _context.Accounts == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Accounts/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null || _context.Accounts == null)
+            {
+                return NotFound();
+            }
 
-        //    var account = await _context.Accounts
-        //        .Include(a => a.ItnNavigation)
-        //        .Include(a => a.UsreouNavigation)
-        //        .FirstOrDefaultAsync(m => m.AccountNumber == id);
-        //    if (account == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var account = await _context.Accounts
+                .Include(a => a.ItnNavigation)
+                .Include(a => a.UsreouNavigation)
+                .FirstOrDefaultAsync(m => m.AccountNumber == id);
+            if (account == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(account);
-        //}
+            return View(account);
+        }
 
         // GET: Accounts/Create
         [Authorize(Roles = "adminRole")]

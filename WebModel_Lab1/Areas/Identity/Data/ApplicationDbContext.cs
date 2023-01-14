@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebModel_Lab1.Areas.Identity.Data;
 
-public class ApplicationDbContext : IdentityDbContext<User_LR2>
+public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

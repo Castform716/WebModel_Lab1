@@ -17,13 +17,13 @@ namespace WebModel_Lab1.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<User_LR2> _signInManager;
-        private readonly UserManager<User_LR2> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
 
         public LoginWith2faModel(
-            SignInManager<User_LR2> signInManager,
-            UserManager<User_LR2> userManager,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
             ILogger<LoginWith2faModel> logger)
         {
             _signInManager = signInManager;
