@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -15,6 +17,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebModel_Lab1.Controllers
 {
+    //[Authorize]
     public class AccountsController : Controller
     {
         BankSystemContext _context;
@@ -24,6 +27,7 @@ namespace WebModel_Lab1.Controllers
             _context = context;
         }
 
+        
         public async Task<IActionResult> Index(string? Usreou, string? currency, int page = 1, SortState sortOrder = SortState.UsreouAsc)
         {
             int pageSize = 3;
@@ -107,6 +111,7 @@ namespace WebModel_Lab1.Controllers
         //}
 
         // GET: Accounts/Create
+        [Authorize(Roles = "adminRole")]
         public IActionResult Create()
         {
             ViewData["Itn"] = new SelectList(_context.Customers, "Itn", "Itn");
@@ -117,6 +122,7 @@ namespace WebModel_Lab1.Controllers
         // POST: Accounts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "adminRole")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AccountNumber,Usreou,Itn,Currency,Balance,CreditSum")] Account account)
@@ -133,6 +139,7 @@ namespace WebModel_Lab1.Controllers
         }
 
         // GET: Accounts/Edit/5
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Accounts == null)
@@ -153,8 +160,10 @@ namespace WebModel_Lab1.Controllers
         // POST: Accounts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> Edit(string id, [Bind("AccountNumber,Usreou,Itn,Currency,Balance,CreditSum")] Account account)
         {
             if (id != account.AccountNumber)
@@ -188,6 +197,7 @@ namespace WebModel_Lab1.Controllers
         }
 
         // GET: Accounts/Delete/5
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Accounts == null)
@@ -208,8 +218,10 @@ namespace WebModel_Lab1.Controllers
         }
 
         // POST: Accounts/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Accounts == null)

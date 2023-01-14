@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,7 @@ namespace WebModel_Lab1.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "adminRole")]
         // GET: Banks
         public async Task<IActionResult> Index()
         {
@@ -31,6 +34,7 @@ namespace WebModel_Lab1.Controllers
         }
 
         // GET: Banks/Details/5
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Banks == null)
