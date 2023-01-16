@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebModel_Lab1;
 using WebModel_Lab1.Models;
 using WebModel_Lab1.Models.TagHelperModels;
@@ -122,19 +124,44 @@ namespace WebModel_Lab1.Controllers
         // POST: Accounts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "adminRole")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "adminRole")]
         public async Task<IActionResult> Create([Bind("AccountNumber,Usreou,Itn,Currency,Balance,CreditSum")] Account account)
         {
+
+            var curAcc = _context.Accounts.Where(c => c.AccountNumber == account.AccountNumber);
+
+            if (string.IsNullOrEmpty(account.AccountNumber))
+            {
+                ModelState.AddModelError("AccountNumber", "Account number is invalid");
+            }
+            else if (account.AccountNumber.Length > 17 || account.AccountNumber.Length < 10)
+            {
+                ModelState.AddModelError("AccountNumber", "Can't be longer than 17 or shorter than 10");
+            }
+            else if (account.AccountNumber == account.Usreou || account.AccountNumber == account.Itn)
+            {
+                ModelState.AddModelError("", "Account number can't be ITN or USREOU");
+            }
+            else if (account.Balance < 0 || string.IsNullOrEmpty(account.Balance.ToString()))
+            {
+                ModelState.AddModelError("Balance", "Balanc can't be negative or empty");
+            }
+            else if (!curAcc.IsNullOrEmpty())
+            {
+                ModelState.AddModelError("AccountNumber", "Accont number exists");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Itn"] = new SelectList(_context.Customers, "Itn", "Itn", account.Itn);
             ViewData["Usreou"] = new SelectList(_context.Banks, "Usreou", "Usreou", account.Usreou);
+            ViewData["Itn"] = new SelectList(_context.Customers, "Itn", "Itn", account.Itn);
+
             return View(account);
         }
 
