@@ -198,8 +198,8 @@ namespace WebModel_Lab1.Controllers
                 return NotFound();
             }
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(account);
@@ -217,7 +217,7 @@ namespace WebModel_Lab1.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            //}
+            }
             ViewData["Itn"] = new SelectList(_context.Customers, "Itn", "Itn", account.Itn);
             ViewData["Usreou"] = new SelectList(_context.Banks, "Usreou", "Usreou", account.Usreou);
             return View(account);
